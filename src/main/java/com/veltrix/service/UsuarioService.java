@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Servicio para gestionar categorías.
+ * Servicio para gestionar usuarios.
  */
 @Service
 public class UsuarioService {
@@ -19,14 +19,14 @@ public class UsuarioService {
     }
 
     /**
-     * Guarda una categoría.
+     * Guarda un usuario.
      */
     public Usuario guardar(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
     /**
-     * Obtiene todas las categorías.
+     * Obtiene todos los usuarios.
      */
     public List<Usuario> listarTodas() {
         return usuarioRepository.findAll();

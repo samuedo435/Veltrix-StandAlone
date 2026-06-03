@@ -9,5 +9,4 @@ public class VeltrixApplication {
     public static void main(String[] args) {
         SpringApplication.run(VeltrixApplication.class, args);
     }
-
 }

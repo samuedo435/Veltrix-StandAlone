@@ -1,5 +1,7 @@
 package com.veltrix.controller;
 
+import com.veltrix.dto.UsuarioDTO;
+import com.veltrix.mapper.UsuarioMapper;
 import com.veltrix.model.Usuario;
 import com.veltrix.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +19,16 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public List<Usuario> listarUsuarios() {
-        return usuarioService.listarTodos();
+    public List<UsuarioDTO> listarUsuarios() {
+        return usuarioService.listarTodos()
+                .stream()
+                .map(UsuarioMapper::toDTO)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public Usuario obtenerUsuario(@PathVariable Long id) {
-        return usuarioService.obtenerPorId(id);
+    public UsuarioDTO obtenerUsuario(@PathVariable Long id) {
+        return UsuarioMapper.toDTO( usuarioService.obtenerPorId(id));
     }
 
     @PostMapping

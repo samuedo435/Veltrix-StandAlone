@@ -1,5 +1,7 @@
 package com.veltrix.controller;
 
+import com.veltrix.dto.ProductoDTO;
+import com.veltrix.mapper.ProductoMapper;
 import com.veltrix.model.Producto;
 import com.veltrix.service.ProductoService;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +19,16 @@ public class ProductoController {
     }
 
     @GetMapping
-    public List<Producto> listarProductos() {
-        return productoService.listarTodos();
+    public List<ProductoDTO> listarProductos() {
+        return productoService.listarTodos()
+                .stream()
+                .map(ProductoMapper::toDTO)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public Producto obtenerProducto(@PathVariable Long id) {
-        return productoService.obtenerPorId(id);
+    public ProductoDTO obtenerProducto(@PathVariable Long id) {
+        return ProductoMapper.toDTO( productoService.obtenerPorId(id));
     }
 
     @PostMapping

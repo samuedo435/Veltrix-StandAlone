@@ -1,5 +1,7 @@
 package com.veltrix.controller;
 
+import com.veltrix.dto.CategoriaDTO;
+import com.veltrix.mapper.CategoriaMapper;
 import com.veltrix.model.Categoria;
 import com.veltrix.service.CategoriaService;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +19,16 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public List<Categoria> listarCategorias() {
-        return categoriaService.listarTodas();
+    public List<CategoriaDTO> listarCategorias() {
+        return categoriaService.listarTodas()
+                .stream()
+                .map(CategoriaMapper::toDTO)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public Categoria obtenerCategoria(@PathVariable Long id) {
-        return categoriaService.obtenerPorId(id);
+    public CategoriaDTO obtenerCategoria(@PathVariable Long id) {
+        return CategoriaMapper.toDTO( categoriaService.obtenerPorId(id));
     }
 
     @PostMapping

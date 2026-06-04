@@ -1,5 +1,7 @@
 package com.veltrix.controller;
 
+import com.veltrix.dto.ClienteDTO;
+import com.veltrix.mapper.ClienteMapper;
 import com.veltrix.model.Cliente;
 import com.veltrix.service.ClienteService;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +19,16 @@ public class ClienteController {
     }
 
     @GetMapping
-    public List<Cliente> listarClientes() {
-        return clienteService.listarTodos();
+    public List<ClienteDTO> listarClientes() {
+        return clienteService.listarTodos()
+                .stream()
+                .map(ClienteMapper::toDTO)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public Cliente obtenerCliente(@PathVariable Long id) {
-        return clienteService.obtenerPorId(id);
+    public ClienteDTO obtenerCliente(@PathVariable Long id) {
+        return ClienteMapper.toDTO( clienteService.obtenerPorId(id));
     }
 
     @PostMapping

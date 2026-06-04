@@ -2,6 +2,8 @@ package com.veltrix.controller;
 
 import com.veltrix.model.Pedido;
 import com.veltrix.service.PedidoService;
+import com.veltrix.dto.PedidoDTO;
+import com.veltrix.mapper.PedidoMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +19,21 @@ public class PedidoController {
     }
 
     @GetMapping
-    public List<Pedido> listarPedidos() {
-        return pedidoService.listarTodos();
+    public List<PedidoDTO> listarPedidos() {
+
+        return pedidoService.listarTodos()
+                .stream()
+                .map(PedidoMapper::toDTO)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public Pedido obtenerPedido(@PathVariable Long id) {
-        return pedidoService.obtenerPorId(id);
+    public PedidoDTO obtenerPedido(
+            @PathVariable Long id) {
+
+        return PedidoMapper.toDTO(
+                pedidoService.obtenerPorId(id)
+        );
     }
 
     @PostMapping

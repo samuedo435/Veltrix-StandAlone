@@ -35,7 +35,7 @@ public class CategoriaService {
     
     public Categoria obtenerPorId(Long id) {
         return categoriaRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con id: " + id));
     }
 
     public Categoria actualizar(Long id, Categoria categoriaActualizada) {

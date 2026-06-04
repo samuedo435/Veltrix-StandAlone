@@ -32,16 +32,16 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public Usuario guardarUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.guardar(usuario);
+    public UsuarioDTO guardarUsuario(@RequestBody Usuario usuario) {
+        return UsuarioMapper.toDTO( usuarioService.guardar(usuario));
     }
 
     @PutMapping("/{id}")
-    public Usuario actualizarUsuario(
+    public UsuarioDTO actualizarUsuario(
             @PathVariable Long id,
             @RequestBody Usuario usuario) {
 
-        return usuarioService.actualizar(id, usuario);
+        return UsuarioMapper.toDTO( usuarioService.actualizar(id, usuario));
     }
 
     @DeleteMapping("/{id}")

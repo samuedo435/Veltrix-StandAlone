@@ -32,16 +32,16 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public Categoria guardarCategoria(@RequestBody Categoria categoria) {
-        return categoriaService.guardar(categoria);
+    public CategoriaDTO guardarCategoria(@RequestBody Categoria categoria) {
+        return CategoriaMapper.toDTO( categoriaService.guardar(categoria));
     }
 
     @PutMapping("/{id}")
-    public Categoria actualizarCategoria(
+    public CategoriaDTO actualizarCategoria(
             @PathVariable Long id,
             @RequestBody Categoria categoria) {
 
-        return categoriaService.actualizar(id, categoria);
+        return CategoriaMapper.toDTO( categoriaService.actualizar(id, categoria));
     }
 
     @DeleteMapping("/{id}")

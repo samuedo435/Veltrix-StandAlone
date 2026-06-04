@@ -32,16 +32,16 @@ public class ProductoController {
     }
 
     @PostMapping
-    public Producto guardarProducto(@RequestBody Producto producto) {
-        return productoService.guardar(producto);
+    public ProductoDTO guardarProducto(@RequestBody Producto producto) {
+        return ProductoMapper.toDTO( productoService.guardar(producto));
     }
 
     @PutMapping("/{id}")
-    public Producto actualizarProducto(
+    public ProductoDTO actualizarProducto(
             @PathVariable Long id,
             @RequestBody Producto producto) {
 
-        return productoService.actualizar(id, producto);
+        return ProductoMapper.toDTO( productoService.actualizar(id, producto));
     }
 
     @DeleteMapping("/{id}")

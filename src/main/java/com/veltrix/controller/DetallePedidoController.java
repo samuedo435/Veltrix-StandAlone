@@ -36,20 +36,20 @@ public class DetallePedidoController {
     }
 
     @PostMapping
-    public DetallePedido guardarDetalle(
+    public DetallePedidoDTO guardarDetalle(
             @RequestBody DetallePedido detallePedido) {
 
-        return detallePedidoService.guardar(detallePedido);
+        return DetallePedidoMapper.toDTO( detallePedidoService.guardar(detallePedido));
     }
 
     @PutMapping("/{id}")
-    public DetallePedido actualizarDetalle(
+    public DetallePedidoDTO actualizarDetalle(
             @PathVariable Long id,
             @RequestBody DetallePedido detallePedido) {
 
-        return detallePedidoService.actualizar(
+        return DetallePedidoMapper.toDTO( detallePedidoService.actualizar(
                 id,
-                detallePedido);
+                detallePedido));
     }
 
     @DeleteMapping("/{id}")

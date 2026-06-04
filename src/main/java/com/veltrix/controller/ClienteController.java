@@ -32,16 +32,16 @@ public class ClienteController {
     }
 
     @PostMapping
-    public Cliente guardarCliente(@RequestBody Cliente cliente) {
-        return clienteService.guardar(cliente);
+    public ClienteDTO guardarCliente(@RequestBody Cliente cliente) {
+        return ClienteMapper.toDTO( clienteService.guardar(cliente));
     }
 
     @PutMapping("/{id}")
-    public Cliente actualizarCliente(
+    public ClienteDTO actualizarCliente(
             @PathVariable Long id,
             @RequestBody Cliente cliente) {
 
-        return clienteService.actualizar(id, cliente);
+        return ClienteMapper.toDTO( clienteService.actualizar(id, cliente));
     }
 
     @DeleteMapping("/{id}")

@@ -4,6 +4,7 @@ import com.veltrix.model.Pedido;
 import com.veltrix.service.PedidoService;
 import com.veltrix.dto.PedidoDTO;
 import com.veltrix.mapper.PedidoMapper;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,18 +38,18 @@ public class PedidoController {
     }
 
     @PostMapping
-    public Pedido guardarPedido(
+    public PedidoDTO guardarPedido(
             @RequestBody Pedido pedido) {
 
-        return pedidoService.guardar(pedido);
+        return PedidoMapper.toDTO( pedidoService.guardar(pedido));
     }
 
     @PutMapping("/{id}")
-    public Pedido actualizarPedido(
+    public PedidoDTO actualizarPedido(
             @PathVariable Long id,
             @RequestBody Pedido pedido) {
 
-        return pedidoService.actualizar(id, pedido);
+        return PedidoMapper.toDTO( pedidoService.actualizar(id, pedido));
     }
 
     @DeleteMapping("/{id}")

@@ -1,5 +1,7 @@
 package com.veltrix.model;
 
+import com.veltrix.enums.EstadoPago;
+import com.veltrix.enums.MetodoPago;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,9 +27,11 @@ public class Pago {
 
     private Double monto;
 
-    private String metodoPago;
+    @Enumerated(EnumType.STRING)
+    private MetodoPago metodoPago;
 
-    private String estadoPago;
+    @Enumerated(EnumType.STRING)
+    private EstadoPago estadoPago;
 
     @OneToOne
     @JoinColumn(name = "pedido_id")

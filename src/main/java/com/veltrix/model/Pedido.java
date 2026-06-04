@@ -1,5 +1,6 @@
 package com.veltrix.model;
 
+import com.veltrix.enums.EstadoPedido;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,8 @@ public class Pedido {
 
     private Double montoTotal;
 
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    private EstadoPedido estado;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")

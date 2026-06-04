@@ -1,5 +1,6 @@
 package com.veltrix.model;
 
+import com.veltrix.enums.Rol;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class Usuario {
     private String password;
 
     @Column(nullable = false)
-    private String rol;
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
 }

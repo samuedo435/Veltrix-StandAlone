@@ -1,5 +1,6 @@
 package com.veltrix.service;
 
+import com.veltrix.exception.ResourceNotFoundException;
 import com.veltrix.model.Categoria;
 import com.veltrix.repository.CategoriaRepository;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class CategoriaService {
     
     public Categoria obtenerPorId(Long id) {
         return categoriaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada"));
     }
 
     public Categoria actualizar(Long id, Categoria categoriaActualizada) {

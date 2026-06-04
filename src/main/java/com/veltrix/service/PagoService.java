@@ -1,5 +1,6 @@
 package com.veltrix.service;
 
+import com.veltrix.exception.ResourceNotFoundException;
 import com.veltrix.model.Pago;
 import com.veltrix.repository.PagoRepository;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,32 @@ public class PagoService {
 
     public List<Pago> listarTodos() {
         return pagoRepository.findAll();
+    }
+
+    public Pago obtenerPorId(Long id) {
+        return pagoRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Pago no encontrado con id: " + id));
+    }
+
+    public Pago actualizar(Long id, Pago pagoActualizado) {
+
+        Pago Pago = obtenerPorId(id);
+
+        Pago.setFechaPago(pagoActualizado.getFechaPago());
+        Pago.setMonto(pagoActualizado.getMonto());
+        Pago.setMetodoPago(pagoActualizado.getMetodoPago());
+        Pago.setEstadoPago(pagoActualizado.getEstadoPago());
+        Pago.setPedido(pagoActualizado.getPedido());
+
+        return pagoRepository.save(Pago);
+    }
+
+    public void eliminar(Long id) {
+
+        Pago Pago = obtenerPorId(id);
+
+        pagoRepository.delete(Pago);
     }
 }

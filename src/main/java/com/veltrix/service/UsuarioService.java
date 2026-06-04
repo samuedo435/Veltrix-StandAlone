@@ -4,6 +4,7 @@ import com.veltrix.exception.ResourceNotFoundException;
 import com.veltrix.model.Usuario;
 import com.veltrix.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -14,21 +15,25 @@ import java.util.List;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(
+            UsuarioRepository usuarioRepository,
+            PasswordEncoder passwordEncoder) {
+
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    /**
-     * Guarda un usuario.
-     */
     public Usuario guardar(Usuario usuario) {
+
+        usuario.setPassword(
+                passwordEncoder.encode(usuario.getPassword())
+        );
+
         return usuarioRepository.save(usuario);
     }
 
-    /**
-     * Obtiene todos los usuarios.
-     */
     public List<Usuario> listarTodos() {
         return usuarioRepository.findAll();
     }
@@ -45,7 +50,13 @@ public class UsuarioService {
         Usuario usuario = obtenerPorId(id);
 
         usuario.setCorreo(usuarioActualizado.getCorreo());
-        usuario.setPassword(usuarioActualizado.getPassword());
+
+        usuario.setPassword(
+                passwordEncoder.encode(
+                        usuarioActualizado.getPassword()
+                )
+        );
+
         usuario.setRol(usuarioActualizado.getRol());
 
         return usuarioRepository.save(usuario);

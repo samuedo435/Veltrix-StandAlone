@@ -43,14 +43,20 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(auth -> auth
-
+                        //Publicos
                         .requestMatchers(
                                 "/api/auth/**",
                                 "/h2-console/**"
                         ).permitAll()
-                        .requestMatchers(
-                                "/api/usuarios/**"
-                        ).hasRole("ADMIN")
+                        // SOLO ADMIN (gestión del sistema)
+                        .requestMatchers("/api/usuarios/**").hasRole("ADMIN")
+
+                        .requestMatchers("/api/productos/**").hasRole("ADMIN")
+                        // CLIENTE Y ADMIN (operación del negocio)
+                        .requestMatchers("/api/pedidos/**").hasAnyRole("CLIENTE", "ADMIN")
+
+                        .requestMatchers("/api/pagos/**").hasAnyRole("CLIENTE", "ADMIN")
+
 
                         .anyRequest().authenticated()
                 )

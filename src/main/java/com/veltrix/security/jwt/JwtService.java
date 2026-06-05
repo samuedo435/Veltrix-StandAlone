@@ -18,10 +18,13 @@ public class JwtService {
     private final Key key =
             Keys.hmacShaKeyFor(SECRET.getBytes());
 
-    public String generarToken(String correo) {
+    public String generarToken(
+            String correo,
+            String rol) {
 
         return Jwts.builder()
                 .subject(correo)
+                .claim("rol", rol)
                 .issuedAt(new Date())
                 .expiration(
                         new Date(
@@ -31,6 +34,17 @@ public class JwtService {
                 )
                 .signWith(key)
                 .compact();
+    }
+
+    public String extraerRol(String token) {
+
+        Claims claims = Jwts.parser()
+                .verifyWith((javax.crypto.SecretKey) key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+        return claims.get("rol", String.class);
     }
 
     public String extraerCorreo(String token) {

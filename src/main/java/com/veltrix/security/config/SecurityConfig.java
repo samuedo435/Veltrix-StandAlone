@@ -48,6 +48,9 @@ public class SecurityConfig {
                                 "/api/auth/**",
                                 "/h2-console/**"
                         ).permitAll()
+                        .requestMatchers(
+                                "/api/usuarios/**"
+                        ).hasRole("ADMIN")
 
                         .anyRequest().authenticated()
                 )

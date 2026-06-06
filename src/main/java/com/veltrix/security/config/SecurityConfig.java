@@ -3,6 +3,7 @@ package com.veltrix.security.config;
 import com.veltrix.security.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -43,19 +44,50 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(auth -> auth
-                        //Publicos
+
+                        // Públicos
                         .requestMatchers(
                                 "/api/auth/**",
-                                "/h2-console/**"
+                                "/h2-console/**",
+                                "/error"
                         ).permitAll()
-                        // SOLO ADMIN (gestión del sistema)
-                        .requestMatchers("/api/usuarios/**").hasRole("ADMIN")
 
-                        .requestMatchers("/api/productos/**").hasRole("ADMIN")
-                        // CLIENTE Y ADMIN (operación del negocio)
-                        .requestMatchers("/api/pedidos/**").hasAnyRole("CLIENTE", "ADMIN")
+                        // Usuarios -> solo ADMIN
+                        .requestMatchers("/api/usuarios/**")
+                        .hasRole("ADMIN")
 
-                        .requestMatchers("/api/pagos/**").hasAnyRole("CLIENTE", "ADMIN")
+                        // Categorías -> solo ADMIN
+                        .requestMatchers("/api/categorias/**")
+                        .hasRole("ADMIN")
+
+                        // Productos
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/productos/**")
+                        .hasAnyRole("ADMIN", "CLIENTE")
+
+                        .requestMatchers(HttpMethod.POST,
+                                "/api/productos/**")
+                        .hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.PUT,
+                                "/api/productos/**")
+                        .hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.DELETE,
+                                "/api/productos/**")
+                        .hasRole("ADMIN")
+
+                        // Pedidos
+                        .requestMatchers("/api/pedidos/**")
+                        .hasAnyRole("ADMIN", "CLIENTE")
+
+                        // Detalles de pedido
+                        .requestMatchers("/api/detalles-pedido/**")
+                        .hasAnyRole("ADMIN", "CLIENTE")
+
+                        // Pagos
+                        .requestMatchers("/api/pagos/**")
+                        .hasAnyRole("ADMIN", "CLIENTE")
 
 
                         .anyRequest().authenticated()

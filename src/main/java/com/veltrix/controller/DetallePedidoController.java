@@ -5,6 +5,7 @@ import com.veltrix.dto.DetallePedidoDTO;
 import com.veltrix.model.DetallePedido;
 import com.veltrix.service.DetallePedidoService;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class DetallePedidoController {
 
     @PostMapping
     public DetallePedidoDTO guardarDetalle(
-            @RequestBody DetallePedido detallePedido) {
+            @Valid @RequestBody DetallePedido detallePedido) {
 
         return DetallePedidoMapper.toDTO( detallePedidoService.guardar(detallePedido));
     }
@@ -45,7 +46,7 @@ public class DetallePedidoController {
     @PutMapping("/{id}")
     public DetallePedidoDTO actualizarDetalle(
             @PathVariable Long id,
-            @RequestBody DetallePedido detallePedido) {
+            @Valid @RequestBody DetallePedido detallePedido) {
 
         return DetallePedidoMapper.toDTO( detallePedidoService.actualizar(
                 id,

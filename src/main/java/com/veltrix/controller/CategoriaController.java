@@ -5,6 +5,7 @@ import com.veltrix.mapper.CategoriaMapper;
 import com.veltrix.model.Categoria;
 import com.veltrix.service.CategoriaService;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -32,14 +33,14 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public CategoriaDTO guardarCategoria(@RequestBody Categoria categoria) {
+    public CategoriaDTO guardarCategoria(@Valid @RequestBody Categoria categoria) {
         return CategoriaMapper.toDTO( categoriaService.guardar(categoria));
     }
 
     @PutMapping("/{id}")
     public CategoriaDTO actualizarCategoria(
             @PathVariable Long id,
-            @RequestBody Categoria categoria) {
+            @Valid @RequestBody Categoria categoria) {
 
         return CategoriaMapper.toDTO( categoriaService.actualizar(id, categoria));
     }

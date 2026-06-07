@@ -5,6 +5,7 @@ import com.veltrix.mapper.ClienteMapper;
 import com.veltrix.model.Cliente;
 import com.veltrix.service.ClienteService;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -32,14 +33,14 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ClienteDTO guardarCliente(@RequestBody Cliente cliente) {
+    public ClienteDTO guardarCliente(@Valid @RequestBody Cliente cliente) {
         return ClienteMapper.toDTO( clienteService.guardar(cliente));
     }
 
     @PutMapping("/{id}")
     public ClienteDTO actualizarCliente(
             @PathVariable Long id,
-            @RequestBody Cliente cliente) {
+            @Valid @RequestBody Cliente cliente) {
 
         return ClienteMapper.toDTO( clienteService.actualizar(id, cliente));
     }

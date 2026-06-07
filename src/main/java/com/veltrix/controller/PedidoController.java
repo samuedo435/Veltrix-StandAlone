@@ -6,6 +6,7 @@ import com.veltrix.dto.PedidoDTO;
 import com.veltrix.mapper.PedidoMapper;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class PedidoController {
 
     @PostMapping
     public PedidoDTO guardarPedido(
-            @RequestBody Pedido pedido) {
+            @Valid @RequestBody Pedido pedido) {
 
         return PedidoMapper.toDTO( pedidoService.guardar(pedido));
     }
@@ -47,7 +48,7 @@ public class PedidoController {
     @PutMapping("/{id}")
     public PedidoDTO actualizarPedido(
             @PathVariable Long id,
-            @RequestBody Pedido pedido) {
+            @Valid @RequestBody Pedido pedido) {
 
         return PedidoMapper.toDTO( pedidoService.actualizar(id, pedido));
     }

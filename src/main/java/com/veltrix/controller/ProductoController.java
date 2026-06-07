@@ -7,6 +7,7 @@ import com.veltrix.service.ProductoService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/productos")
@@ -32,14 +33,14 @@ public class ProductoController {
     }
 
     @PostMapping
-    public ProductoDTO guardarProducto(@RequestBody Producto producto) {
+    public ProductoDTO guardarProducto(@Valid @RequestBody Producto producto) {
         return ProductoMapper.toDTO( productoService.guardar(producto));
     }
 
     @PutMapping("/{id}")
     public ProductoDTO actualizarProducto(
             @PathVariable Long id,
-            @RequestBody Producto producto) {
+            @Valid @RequestBody Producto producto) {
 
         return ProductoMapper.toDTO( productoService.actualizar(id, producto));
     }

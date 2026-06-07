@@ -5,6 +5,7 @@ import com.veltrix.mapper.PagoMapper;
 import com.veltrix.model.Pago;
 import com.veltrix.service.PagoService;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -32,14 +33,14 @@ public class PagoController {
     }
 
     @PostMapping
-    public PagoDTO guardarPago(@RequestBody Pago pago) {
+    public PagoDTO guardarPago(@Valid @RequestBody Pago pago) {
         return PagoMapper.toDTO( pagoService.guardar(pago));
     }
 
     @PutMapping("/{id}")
     public PagoDTO actualizarPago(
             @PathVariable Long id,
-            @RequestBody Pago pago) {
+            @Valid @RequestBody Pago pago) {
 
         return PagoMapper.toDTO( pagoService.actualizar(id, pago));
     }

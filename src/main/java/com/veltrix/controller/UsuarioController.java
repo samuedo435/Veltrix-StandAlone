@@ -5,6 +5,7 @@ import com.veltrix.mapper.UsuarioMapper;
 import com.veltrix.model.Usuario;
 import com.veltrix.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -32,14 +33,14 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public UsuarioDTO guardarUsuario(@RequestBody Usuario usuario) {
+    public UsuarioDTO guardarUsuario(@Valid @RequestBody Usuario usuario) {
         return UsuarioMapper.toDTO( usuarioService.guardar(usuario));
     }
 
     @PutMapping("/{id}")
     public UsuarioDTO actualizarUsuario(
             @PathVariable Long id,
-            @RequestBody Usuario usuario) {
+            @Valid @RequestBody Usuario usuario) {
 
         return UsuarioMapper.toDTO( usuarioService.actualizar(id, usuario));
     }

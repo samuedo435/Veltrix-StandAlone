@@ -56,7 +56,11 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/auth/**",
                                 "/h2-console/**",
-                                "/error"
+                                "/error",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+
+                                "/v3/api-docs/**"
                         ).permitAll()
 
                         // Usuarios -> solo ADMIN

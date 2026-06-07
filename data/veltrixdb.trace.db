@@ -1,0 +1,19 @@
+2026-06-06 22:55:43.254500-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'PENDIENTE' (PEDIDOS_COPY_3_4: ""ESTADO"" TINYINT)"
+Data conversion error converting "'PENDIENTE' (PEDIDOS_COPY_3_4: ""ESTADO"" TINYINT)"; SQL statement:
+INSERT INTO "PUBLIC"."PEDIDOS_COPY_3_4"("ID", "ESTADO", "FECHA_PEDIDO", "MONTO_TOTAL", "CLIENTE_ID") OVERRIDING SYSTEM VALUE SELECT "ID", "ESTADO", "FECHA_PEDIDO", "MONTO_TOTAL", "CLIENTE_ID" FROM "PUBLIC"."PEDIDOS" [22018-240]
+2026-06-06 22:55:43.277049-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'CLIENTE' (USUARIOS_COPY_3_7: ""ROL"" TINYINT NOT NULL)"
+Data conversion error converting "'CLIENTE' (USUARIOS_COPY_3_7: ""ROL"" TINYINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."USUARIOS_COPY_3_7"("ID", "CORREO", "PASSWORD", "ROL") OVERRIDING SYSTEM VALUE SELECT "ID", "CORREO", "PASSWORD", "ROL" FROM "PUBLIC"."USUARIOS" [22018-240]
+2026-06-06 22:56:41.525006-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "ADMIN"
+Data conversion error converting "ADMIN" [22018-240]
+2026-06-06 23:03:00.648929-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'PENDIENTE' (PEDIDOS_COPY_3_0: ""ESTADO"" TINYINT)"
+Data conversion error converting "'PENDIENTE' (PEDIDOS_COPY_3_0: ""ESTADO"" TINYINT)"; SQL statement:
+INSERT INTO "PUBLIC"."PEDIDOS_COPY_3_0"("ID", "ESTADO", "FECHA_PEDIDO", "MONTO_TOTAL", "CLIENTE_ID") OVERRIDING SYSTEM VALUE SELECT "ID", "ESTADO", "FECHA_PEDIDO", "MONTO_TOTAL", "CLIENTE_ID" FROM "PUBLIC"."PEDIDOS" [22018-240]
+2026-06-06 23:03:00.665967-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'CLIENTE' (USUARIOS_COPY_3_1: ""ROL"" TINYINT NOT NULL)"
+Data conversion error converting "'CLIENTE' (USUARIOS_COPY_3_1: ""ROL"" TINYINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."USUARIOS_COPY_3_1"("ID", "CORREO", "PASSWORD", "ROL") OVERRIDING SYSTEM VALUE SELECT "ID", "CORREO", "PASSWORD", "ROL" FROM "PUBLIC"."USUARIOS" [22018-240]

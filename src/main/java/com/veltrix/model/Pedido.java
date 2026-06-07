@@ -28,6 +28,7 @@ public class Pedido {
     private Double montoTotal;
 
     @NotNull(message = "El estado es obligatorio")
+    @Enumerated(EnumType.STRING)
     private EstadoPedido estado;
 
     @ManyToOne

@@ -32,9 +32,11 @@ public class Pago {
     private Double monto;
 
     @NotNull(message = "El método de pago es obligatorio")
+    @Enumerated(EnumType.STRING)
     private MetodoPago metodoPago;
 
     @NotNull(message = "El estado del pago es obligatorio")
+    @Enumerated(EnumType.STRING)
     private EstadoPago estadoPago;
 
     @OneToOne

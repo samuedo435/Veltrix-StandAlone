@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.validation.constraints.*;
 
 /**
  * Entidad que representa un cliente.
@@ -19,14 +20,16 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
-    @Column(nullable = false)
+    @NotBlank(message = "El apellido es obligatorio")
     private String apellido;
 
+    @NotBlank(message = "El teléfono es obligatorio")
     private String telefono;
 
+    @NotBlank(message = "La dirección es obligatoria")
     private String direccion;
 
     @OneToOne

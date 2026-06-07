@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDateTime;
 
@@ -23,14 +24,17 @@ public class Pago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "La fecha es obligatoria")
     private LocalDateTime fechaPago;
 
+    @NotNull(message = "El monto es obligatorio")
+    @Positive(message = "El monto debe ser mayor que cero")
     private Double monto;
 
-    @Enumerated(EnumType.STRING)
+    @NotNull(message = "El método de pago es obligatorio")
     private MetodoPago metodoPago;
 
-    @Enumerated(EnumType.STRING)
+    @NotNull(message = "El estado del pago es obligatorio")
     private EstadoPago estadoPago;
 
     @OneToOne

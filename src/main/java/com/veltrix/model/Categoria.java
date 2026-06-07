@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.validation.constraints.*;
 
 /**
  * Entidad que representa una categoría de productos.
@@ -19,9 +20,10 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
+    @NotBlank(message = "La descripción es obligatoria")
     private String descripcion;
 
 }

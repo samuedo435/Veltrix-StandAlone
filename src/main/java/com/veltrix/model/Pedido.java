@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "pedidos")
@@ -19,11 +20,14 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "La fecha es obligatoria")
     private LocalDateTime fechaPedido;
 
+    @NotNull(message = "El monto es obligatorio")
+    @Positive(message = "El monto debe ser mayor que cero")
     private Double montoTotal;
 
-    @Enumerated(EnumType.STRING)
+    @NotNull(message = "El estado es obligatorio")
     private EstadoPedido estado;
 
     @ManyToOne

@@ -1,5 +1,6 @@
 package com.veltrix.security.config;
 
+import com.veltrix.exception.JwtAuthenticationEntryPoint;
 import com.veltrix.security.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,11 +16,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthenticationEntryPoint authenticationEntryPoint;
+    private final com.veltrix.exception.JwtAccessDeniedHandler accessDeniedHandler;
 
     public SecurityConfig(
-            JwtAuthenticationFilter jwtAuthenticationFilter) {
+            JwtAuthenticationFilter jwtAuthenticationFilter,
+            JwtAuthenticationEntryPoint authenticationEntryPoint,
+            com.veltrix.exception.JwtAccessDeniedHandler accessDeniedHandler) {
 
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.authenticationEntryPoint = authenticationEntryPoint;
+        this.accessDeniedHandler = accessDeniedHandler;
     }
 
     @Bean
@@ -96,6 +103,14 @@ public class SecurityConfig {
                 .addFilterBefore(
                         jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class
+                )
+                .exceptionHandling(exception -> exception
+
+                        .authenticationEntryPoint(
+                                authenticationEntryPoint)
+
+                        .accessDeniedHandler(
+                                accessDeniedHandler)
                 );
 
         return http.build();

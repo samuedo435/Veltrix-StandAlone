@@ -1,7 +1,9 @@
 package com.veltrix.security.auth;
 
+import com.veltrix.dto.auth.AuthUserResponse;
 import com.veltrix.dto.auth.RegisterRequest;
 import com.veltrix.enums.Rol;
+import com.veltrix.exception.ResourceNotFoundException;
 import com.veltrix.model.Cliente;
 import com.veltrix.model.Usuario;
 import com.veltrix.repository.ClienteRepository;
@@ -57,5 +59,19 @@ public class AuthService {
         cliente.setUsuario(usuarioGuardado);
 
         clienteRepository.save(cliente);
+    }
+    public AuthUserResponse obtenerUsuarioActual(String correo) {
+
+        Usuario usuario = usuarioRepository
+                .findByCorreo(correo)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Usuario no encontrado"));
+
+        return new AuthUserResponse(
+                usuario.getId(),
+                usuario.getCorreo(),
+                usuario.getRol()
+        );
     }
 }

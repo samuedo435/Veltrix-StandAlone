@@ -1,5 +1,6 @@
 package com.veltrix.security.auth;
 
+import com.veltrix.dto.auth.AuthUserResponse;
 import com.veltrix.dto.auth.RegisterRequest;
 import com.veltrix.dto.auth.RegisterResponse;
 import com.veltrix.model.Usuario;
@@ -8,6 +9,7 @@ import com.veltrix.security.jwt.JwtService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import jakarta.validation.Valid;
@@ -69,5 +71,15 @@ public class AuthController {
                         usuario.getRol().name());
 
         return new LoginResponse(token);
+    }
+    @GetMapping("/me")
+    public ResponseEntity<AuthUserResponse> me(
+            Authentication authentication) {
+
+        String correo = authentication.getName();
+
+        return ResponseEntity.ok(
+                authService.obtenerUsuarioActual(correo)
+        );
     }
 }

@@ -75,7 +75,7 @@ public class SecurityConfig {
                         // Productos
                         .requestMatchers(HttpMethod.GET,
                                 "/api/productos/**")
-                        .hasAnyRole("ADMIN", "CLIENTE")
+                        .permitAll()
 
                         .requestMatchers(HttpMethod.POST,
                                 "/api/productos/**")

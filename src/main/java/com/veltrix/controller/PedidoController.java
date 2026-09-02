@@ -1,5 +1,7 @@
 package com.veltrix.controller;
 
+import com.veltrix.dto.checkout.CheckoutRequest;
+import com.veltrix.dto.checkout.CheckoutResponse;
 import com.veltrix.model.Pedido;
 import com.veltrix.service.PedidoService;
 import com.veltrix.dto.PedidoDTO;
@@ -58,5 +60,12 @@ public class PedidoController {
             @PathVariable Long id) {
 
         pedidoService.eliminar(id);
+    }
+
+    @PostMapping("/checkout")
+    public CheckoutResponse checkout(
+            @RequestBody CheckoutRequest request) {
+
+        return pedidoService.realizarCheckout(request);
     }
 }

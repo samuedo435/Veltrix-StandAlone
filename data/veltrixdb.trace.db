@@ -17,3 +17,31 @@ INSERT INTO "PUBLIC"."PEDIDOS_COPY_3_0"("ID", "ESTADO", "FECHA_PEDIDO", "MONTO_T
 org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'CLIENTE' (USUARIOS_COPY_3_1: ""ROL"" TINYINT NOT NULL)"
 Data conversion error converting "'CLIENTE' (USUARIOS_COPY_3_1: ""ROL"" TINYINT NOT NULL)"; SQL statement:
 INSERT INTO "PUBLIC"."USUARIOS_COPY_3_1"("ID", "CORREO", "PASSWORD", "ROL") OVERRIDING SYSTEM VALUE SELECT "ID", "CORREO", "PASSWORD", "ROL" FROM "PUBLIC"."USUARIOS" [22018-240]
+2026-06-24 12:07:26.338401-05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "PRODUCTO" no encontrada
+Table "PRODUCTO" not found; SQL statement:
+-- ============================================================
+-- 2. INSERTAR PRODUCTOS
+-- stock = suma de unidades disponibles por talla en data-stock
+-- ============================================================
+INSERT INTO producto (id, nombre, descripcion, precio, stock, categoria_id) VALUES
+
+-- Hombres (categoria_id = 5)
+(1,  'Roadstride Casual', 'Zapato casual para uso diario, con soporte cómodo y estilo moderno',                              120.00, 13, 5),
+(2,  'Sprintflow',        'Zapato de running de alto rendimiento, ligero y con amortiguación reactiva',                      145.00, 13, 5),
+(3,  'TerraGrip Trail',   'Zapato de trail con agarre superior para terrenos irregulares y condiciones exigentes',           138.00,  9, 5),
+
+-- Mujeres (categoria_id = 6)
+(4,  'Aurora Run',        'Zapato de running con amortiguación avanzada, diseño ligero y ajuste anatómico',                  150.00, 11, 6),
+(5,  'Pulse Fit',         'Zapato de entrenamiento versátil, ideal para gimnasio y actividades de alta intensidad',          138.00, 11, 6),
+(6,  'Nova Court',        'Zapato casual de estilo urbano, pensado para la comodidad durante toda la jornada',               125.00,  9, 6),
+(7,  'Bloomstride',       'Zapato casual con diseño elegante y soporte para caminatas prolongadas',                          132.00, 10, 6),
+
+-- Niños (categoria_id = 3)
+(8,  'Mini Sprint',       'Zapato de running infantil, ligero y resistente para jóvenes corredores',                          68.00,  7, 3),
+(9,  'Tiny Trail',        'Zapato de trail para niños, con suela robusta ideal para aventuras al aire libre',                  75.00,  5, 3),
+(10, 'Star Lite',         'Zapato casual infantil, fácil de poner y cómodo para el uso escolar diario',                       70.00,  3, 3),
+(11, 'Pink Spark',        'Zapato casual infantil con diseño colorido y construcción duradera para uso cotidiano',             72.00,  5, 3),
+
+-- Unisex (categoria_id = 4)
+(12, 'Unity Step',        'Zapato casual unisex de diseño neutro y versátil, adaptable a cualquier ocasión',                110.00,  7, 4) [42102-240]

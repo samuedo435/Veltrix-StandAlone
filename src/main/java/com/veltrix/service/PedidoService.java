@@ -84,6 +84,12 @@ public class PedidoService {
         Cliente cliente = clienteRepository.findByUsuarioCorreo(correo)
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado"));
 
+        // Si el usuario especificó una nueva dirección en el checkout, se actualiza el registro del cliente
+        if (request.getDireccionEnvio() != null && !request.getDireccionEnvio().isBlank()) {
+            cliente.setDireccion(request.getDireccionEnvio());
+            clienteRepository.save(cliente);
+        }
+
         // 1. Preparar las relaciones del detalle y validar stock/monto antes de persistir el Pedido
         double total = 0;
         List<DetallePedido> detalles = new ArrayList<>();

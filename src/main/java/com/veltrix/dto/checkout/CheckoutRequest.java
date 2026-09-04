@@ -14,4 +14,6 @@ public class CheckoutRequest {
     private List<ItemCheckoutDTO> productos;
 
     private String metodoPago;
+
+    private String direccionEnvio; // Campo opcional enviado desde el checkout
 }

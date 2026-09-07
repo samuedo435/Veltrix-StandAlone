@@ -23,9 +23,7 @@ La API utiliza autenticación stateless. Las operaciones protegidas reciben el t
 
 ## Proyectos relacionados
 
-- [Veltrix Web](../veltrix-web): aplicación frontend relacionada para la experiencia de compra y consumo de esta API.
-
-> Si el frontend se encuentra en otro repositorio remoto, sustituye el enlace relativo por la URL pública correspondiente.
+- [Veltrix Web](https://github.com/samuedo435/Veltrix-web.git): aplicación frontend relacionada para la experiencia de compra y consumo de esta API.
 
 ## Stack tecnológico
 
@@ -93,7 +91,7 @@ En entornos de producción, la clave debe trasladarse a variables de entorno o a
 ### 1. Clonar el repositorio
 
 ```bash
-git clone <URL_DEL_REPOSITORIO>
+git clone https://github.com/samuedo435/Veltrix-StandAlone.git
 cd veltrix
 ```
 
@@ -148,16 +146,6 @@ mvn clean compile
 ```
 
 La aplicación se inicia por defecto en `http://localhost:8080`.
-
-### Comandos equivalentes con Gradle
-
-Este repositorio utiliza Maven y no incluye `gradlew`. Si se incorpora una configuración Gradle equivalente, los comandos habituales serían:
-
-```bash
-./gradlew clean build
-./gradlew test
-./gradlew bootRun
-```
 
 ## Documentación de la API
 

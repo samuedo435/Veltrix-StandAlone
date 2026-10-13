@@ -36,3 +36,5 @@ build/
 *.trace.db
 *.lock.db
 
+# Environment variables
+.env

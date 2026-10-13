@@ -99,7 +99,7 @@ public class PedidoController {
             @ApiResponse(responseCode = "400", description = "El carrito o los datos de checkout no son válidos")
         })
     public CheckoutResponse checkout(
-            @RequestBody CheckoutRequest request) {
+            @Valid @RequestBody CheckoutRequest request) {
 
         return pedidoService.realizarCheckout(request);
     }

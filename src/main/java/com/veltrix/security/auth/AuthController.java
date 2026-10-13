@@ -65,28 +65,7 @@ public class AuthController {
     public LoginResponse login(
             @Valid @RequestBody LoginRequest request) {
 
-        Usuario usuario = usuarioRepository
-                .findByCorreo(request.getCorreo())
-                .orElseThrow(() ->
-                        new ResponseStatusException(
-                                HttpStatus.UNAUTHORIZED,
-                                "Credenciales inválidas"));
-
-        if (!passwordEncoder.matches(
-                request.getPassword(),
-                usuario.getPassword())) {
-
-            throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED,
-                    "Credenciales inválidas");
-        }
-
-        String token =
-                jwtService.generarToken(
-                        usuario.getCorreo(),
-                        usuario.getRol().name());
-
-        return new LoginResponse(token);
+        return authService.login(request);
     }
     @GetMapping("/me")
     @Operation(summary = "Consultar sesión actual", description = "Obtiene la identidad y el rol asociados al token JWT autenticado.")
